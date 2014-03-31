@@ -1,0 +1,26 @@
+Y:\disatation game\level builder\level builder\server\server\bin\x86\Debug\server.exe
+Y:\disatation game\level builder\level builder\server\server\bin\x86\Debug\server.pdb
+Y:\disatation game\level builder\level builder\server\server\obj\x86\Debug\ResolveAssemblyReference.cache
+Y:\disatation game\level builder\level builder\server\server\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+Y:\disatation game\level builder\level builder\server\server\obj\x86\Debug\server.exe
+Y:\disatation game\level builder\level builder\server\server\obj\x86\Debug\server.pdb
+Y:\disatation game\level builder\level builder\server\server\bin\x86\Debug\Content\logInText.xnb
+C:\Users\Tux\Desktop\disatation game\level builder\level builder\server\server\bin\x86\Debug\Content\logInText.xnb
+C:\Users\Tux\Desktop\disatation game\level builder\level builder\server\server\bin\x86\Debug\server.exe
+C:\Users\Tux\Desktop\disatation game\level builder\level builder\server\server\bin\x86\Debug\server.pdb
+C:\Users\Tux\Desktop\disatation game\level builder\level builder\server\server\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Tux\Desktop\disatation game\level builder\level builder\server\server\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Tux\Desktop\disatation game\level builder\level builder\server\server\obj\x86\Debug\server.exe
+C:\Users\Tux\Desktop\disatation game\level builder\level builder\server\server\obj\x86\Debug\server.pdb
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\bin\x86\Debug\Content\logInText.xnb
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\bin\x86\Debug\server.exe
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\bin\x86\Debug\server.pdb
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\obj\x86\Debug\server.exe
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\obj\x86\Debug\server.pdb
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\bin\x86\Debug\server.exe.manifest
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\bin\x86\Debug\server.application
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\obj\x86\Debug\server.TrustInfo.xml
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\obj\x86\Debug\server.exe.manifest
+C:\Users\Tux\Desktop\disatation game\level builder\server\server\obj\x86\Debug\server.application

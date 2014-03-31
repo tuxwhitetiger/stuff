@@ -1,0 +1,2 @@
+Content\blank-tile.xnb
+Content\blank-build-page.xnb

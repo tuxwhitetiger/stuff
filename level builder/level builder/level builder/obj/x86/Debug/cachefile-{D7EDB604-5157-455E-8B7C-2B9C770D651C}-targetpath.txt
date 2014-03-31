@@ -1,0 +1,4 @@
+Content\blank-tile.xnb
+Content\blank-build-page.xnb
+Content\event-create-page.xnb
+Content\logInText.xnb

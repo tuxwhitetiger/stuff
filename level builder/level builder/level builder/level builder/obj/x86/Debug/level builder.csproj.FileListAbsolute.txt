@@ -1,0 +1,8 @@
+Y:\disatation game\level builder\level builder\level builder\level builder\obj\x86\Debug\ResolveAssemblyReference.cache
+Y:\disatation game\level builder\level builder\level builder\level builder\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+Y:\disatation game\level builder\level builder\level builder\level builder\bin\x86\Debug\Content\blank-tile.xnb
+Y:\disatation game\level builder\level builder\level builder\level builder\bin\x86\Debug\level builder.exe
+Y:\disatation game\level builder\level builder\level builder\level builder\bin\x86\Debug\level builder.pdb
+Y:\disatation game\level builder\level builder\level builder\level builder\obj\x86\Debug\level builder.exe
+Y:\disatation game\level builder\level builder\level builder\level builder\obj\x86\Debug\level builder.pdb
+Y:\disatation game\level builder\level builder\level builder\level builder\bin\x86\Debug\Content\blank-build-page.xnb
