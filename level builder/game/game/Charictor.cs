@@ -41,7 +41,7 @@ namespace game
 
         List<TalentEffect> effects = new List<TalentEffect>();
 
-        List<Move> moves = new List<Move>();
+        public List<Move> moves = new List<Move>();
         List<object> movesdata = new List<object>();
 
         taltentTree talentTree;
@@ -192,8 +192,7 @@ namespace game
             return TalentTreeData;
         }
         internal void clearTalentGainedEffectsAndMoves()
-        {
-            moves.Clear();
+        {      
             effects.Clear();
         }
         internal void addeffect(TalentEffect effect)

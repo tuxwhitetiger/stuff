@@ -16,11 +16,11 @@ namespace game.moves
         /// overload self use move e.g. mana shild,bloodrage
         /// </summary>
         /// <param name="player">the player it is suesd on</param>
-        public void use(Charictor player)
+
+        internal void use(Charictor charictor)
         {
 
         }
-
 
     }
 }

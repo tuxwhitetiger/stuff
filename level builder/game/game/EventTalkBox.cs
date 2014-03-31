@@ -38,9 +38,9 @@ namespace game
             }
             else
             {
-                sp.DrawString(font, conversation[conversationPosition], new Vector2(10, 630), Color.White);
+                sp.DrawString(font, conversation[conversationPosition], new Vector2(10, 630), Color.Black);
             }
-            sp.DrawString(font, "press space ...", new Vector2(10, 700), Color.White);
+            sp.DrawString(font, "press space ...", new Vector2(10, 700), Color.Black);
         }
         public void loadConversation(String conversation) {
             String[] conversationData = conversation.Split(',');

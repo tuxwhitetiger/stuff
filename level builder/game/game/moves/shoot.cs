@@ -14,5 +14,9 @@ namespace game.moves
             // TODO: Complete member initialization
             this.player = player;
         }
+
+        internal void use(Charictor charictor) { 
+        
+        }
     }
 }

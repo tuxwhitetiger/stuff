@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace game
 {
@@ -19,11 +20,14 @@ namespace game
         bool donetalking = false;
         public bool eventLoaded = false;
 
+        int moveSerlector = 0;
+        int personSerlector = 0;
+
         SpriteFont font;
 
         List<Charictor> left = new List<Charictor>();
         List<EventCharictor> right = new List<EventCharictor>();
-
+        Charictor player;
         EventTalkBox talking = new EventTalkBox();
 
         //left line maths
@@ -61,6 +65,35 @@ namespace game
                 clear();
                 return "done";
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                if (personSerlector > 0)
+                {
+                    personSerlector--;
+                }
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                if (personSerlector < right.Count-1)
+                {
+                    personSerlector++;
+                }
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                if (moveSerlector > 0)
+                {
+                    moveSerlector--;
+                }
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                if (moveSerlector < player.moves.Count)
+                {
+                    moveSerlector++;
+                }
+            }
             return "null";
         }
 
@@ -73,13 +106,42 @@ namespace game
             for (int i = 0; i < left.Count; i++)
             {
                 sp.Draw(left[i].getSpriteSheet(), leftpoints[i], Color.White);
+                
             }
             for (int i = 0; i < right.Count; i++)
             {
                 sp.Draw(right[i].getSpriteSheet(), rightpoints[i], Color.White);
+                if (i == personSerlector)
+                {
+                    sp.DrawString(font, "v", new Vector2(rightpoints[i].X + (right[i].getSpriteSheet().Width / 2), rightpoints[i].Y ), Color.Black);
+                }
             }
 
             talking.Draw(sp, font);
+            //fight move that are availible
+            bool leftrightColom = true;
+            int xpos=975;
+            int ypos =621;
+            for (int i = 0; i < player.moves.Count; i++) {
+                if (i == moveSerlector)
+                {
+                    sp.DrawString(font, ">", new Vector2(xpos - 4, ypos), Color.Black);
+                }
+
+                if (leftrightColom)//left
+                {
+                    sp.DrawString(font, player.moves[i].ToString(), new Vector2(xpos, ypos), Color.Black);
+                    xpos += 158;
+                }
+                else {//right
+                    sp.DrawString(font, player.moves[i].ToString(), new Vector2(xpos, ypos), Color.Black);
+                    ypos += 18;
+                    xpos -= 158;
+                }
+
+                
+                leftrightColom = !leftrightColom;
+            }
         }
 
 
@@ -89,7 +151,9 @@ namespace game
             distributeCharictorsAlongLines();
         }
 
-
+        public void addPlayer(Charictor player) {
+            this.player = player;
+        }
         private void distributeCharictorsAlongLines(){
             leftpoints.Clear();
             rightpoints.Clear();

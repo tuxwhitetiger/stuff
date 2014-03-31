@@ -17,7 +17,8 @@ namespace game.moves
         /// overload team effect heal all partyu menmbers or lowest 5 HP ect
         /// </summary>
         /// <param name="player">the players it is suesd on</param>
-        public void use(List<Charictor> allies)
+
+        internal void use(Charictor charictor)
         {
 
         }

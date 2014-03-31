@@ -396,6 +396,7 @@ namespace game
                         isrunningGame = false;
                         eventScreen.eventLoaded = false;
                         connection.Action("getEvent:" + connection.usernumber);
+                        eventScreen.addPlayer(charictors[activeCharictorArrayId]);
                         while (!eventScreen.eventLoaded) { 
                         
                         }
@@ -631,6 +632,11 @@ namespace game
         internal void loadEvent(string responce)
         {
             eventScreen.LoadData(responce);
+            
+            for(int i=0; i<runningGame.getOtherPlayer().Count;i++){
+                eventScreen.addCharictor(runningGame.getOtherPlayer()[i]);
+            }
+
             eventScreen.eventLoaded = true;
         }
         internal Charictor getCurrentCharictor()
@@ -665,8 +671,6 @@ namespace game
 
 
         }
-        
-
         internal void addItemInventory(int i) { 
             //add to charictor
             charictors[activeCharictorArrayId].addToInventory(itemStore.fetchItem(i));
