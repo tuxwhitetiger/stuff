@@ -5,7 +5,7 @@ using System.Text;
 
 namespace game.moves
 {
-    class stab
+    class stab : generalMove
     {
         private Charictor player;
 
@@ -14,9 +14,10 @@ namespace game.moves
             // TODO: Complete member initialization
             this.player = player;
         }
-        internal void use(Charictor charictor)
-        {
 
+        public override void use(EventCharictor enamy)
+        {
+            enamy.dealdamage(player.getTotalMeleeDamage());
         }
     }
 }

@@ -20,10 +20,14 @@ namespace game
         bool donetalking = false;
         public bool eventLoaded = false;
 
+        bool yourturn = false;
+
         int moveSerlector = 0;
         int personSerlector = 0;
 
         SpriteFont font;
+
+        Game game;
 
         List<Charictor> left = new List<Charictor>();
         List<EventCharictor> right = new List<EventCharictor>();
@@ -45,8 +49,10 @@ namespace game
         List<Vector2> rightpoints = new List<Vector2>();
 
 
-        public EventScreen() {
+        public EventScreen(Game game)
+        {
             distributeCharictorsAlongLines();
+            this.game = game;
         }
         public void Load(Texture2D background,Texture2D badguy, SpriteFont font)
         {
@@ -57,43 +63,86 @@ namespace game
 
 
         public String Update() {
-            string s = talking.Update();
-            if(s.Equals("donetalking")){
-                donetalking = true;
-            }
-            if (donetalking) {
-                clear();
-                return "done";
-            }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (donetalking)
             {
-                if (personSerlector > 0)
+                //***************FIGHT*****************\\
+                List<EventCharictor> toRemove = new List<EventCharictor>();
+                foreach (EventCharictor enamy in right)
                 {
-                    personSerlector--;
+                    if (!enamy.alive)
+                    {
+                        toRemove.Add(enamy);
+                    }
+                }
+                foreach (EventCharictor enamy in toRemove)
+                {
+                    right.Remove(enamy);
+                    player.addXP(enamy.getXP());
+                    if (personSerlector > 0)
+                    {
+                        personSerlector--;
+                    }
+                    if (right.Count == 0)
+                    {
+                        clear();
+                        return "done";
+                    }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
+                    if (personSerlector > 0)
+                    {
+                        personSerlector--;
+                    }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+                    if (personSerlector < right.Count - 1)
+                    {
+                        personSerlector++;
+                    }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                {
+                    if (moveSerlector > 0)
+                    {
+                        moveSerlector--;
+                    }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                {
+                    if (moveSerlector < player.moves.Count)
+                    {
+                        moveSerlector++;
+                    }
+                }
+                if (currentFightmember == fightMemberNumber)
+                {
+
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    {
+                        if (right.Count > 0)
+                        {
+                            int i = right[personSerlector].getHp();
+                            player.UseMove(moveSerlector, right[personSerlector]);
+                            int j = right[personSerlector].getHp();
+                            game.updateServerFight(right[personSerlector].getID(), i - j, fightMemberNumber);
+                            currentFightmember++;
+                            //send message to suerver
+                        }
+                    }
                 }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            else
             {
-                if (personSerlector < right.Count-1)
+                string s = talking.Update();
+                if (s.Equals("donetalking"))
                 {
-                    personSerlector++;
+                    donetalking = true;
                 }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                if (moveSerlector > 0)
-                {
-                    moveSerlector--;
-                }
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                if (moveSerlector < player.moves.Count)
-                {
-                    moveSerlector++;
-                }
-            }
+            
             return "null";
         }
 
@@ -113,11 +162,17 @@ namespace game
                 sp.Draw(right[i].getSpriteSheet(), rightpoints[i], Color.White);
                 if (i == personSerlector)
                 {
-                    sp.DrawString(font, "v", new Vector2(rightpoints[i].X + (right[i].getSpriteSheet().Width / 2), rightpoints[i].Y ), Color.Black);
+                    sp.DrawString(font, "v", new Vector2(rightpoints[i].X + (right[i].getSpriteSheet().Width / 2), rightpoints[i].Y-10), Color.Black);
+                    sp.DrawString(font, right[i].getHp().ToString(), new Vector2(rightpoints[i].X + (right[i].getSpriteSheet().Width / 2), rightpoints[i].Y), Color.Black);
+                }
+                else {
+                    sp.DrawString(font, right[i].getHp().ToString(), new Vector2(rightpoints[i].X + (right[i].getSpriteSheet().Width / 2), rightpoints[i].Y), Color.Black);
                 }
             }
-
-            talking.Draw(sp, font);
+            if (!donetalking)
+            {
+                talking.Draw(sp, font);
+            }
             //fight move that are availible
             bool leftrightColom = true;
             int xpos=975;
@@ -205,7 +260,7 @@ namespace game
             int x = int.Parse(EventData[0]);
             int y = int.Parse(EventData[1]);
 
-            
+
             String[] Charictors = EventData[2].Split('$');
             for (int j = 0; j < Charictors.Length - 1; j++)
             {
@@ -215,7 +270,7 @@ namespace game
                 int HP = int.Parse(charictor[1]);
                 int AttackType = int.Parse(charictor[2]);
                 int AttackPower = int.Parse(charictor[3]);
-                EventCharictor c = new EventCharictor(name, HP, AttackType, AttackPower,badguy);
+                EventCharictor c = new EventCharictor(name, HP, AttackType, AttackPower, badguy, j);
                 String[] convo = charictor[4].Split('.');
                 for (int k = 0; k < convo.Length; k++)
                 {
@@ -227,16 +282,20 @@ namespace game
             }
             int shortestconvo = int.MaxValue;
 
-            foreach (EventCharictor c in right) {
-                if (c.getTalkLength() < shortestconvo) {
+            foreach (EventCharictor c in right)
+            {
+                if (c.getTalkLength() < shortestconvo)
+                {
                     shortestconvo = c.getTalkLength();
                 }
             }
 
-            for(int i = 0; i<  shortestconvo ;i++){
-                for (int j = 0; j < right.Count; j++) { 
+            for (int i = 0; i < shortestconvo; i++)
+            {
+                for (int j = 0; j < right.Count; j++)
+                {
 
-                    String s =right[j].getTalkLength(i);
+                    String s = right[j].getTalkLength(i);
                     if ((s.Equals("")) || (s.Equals("-^-")))
                     {
 
@@ -250,5 +309,21 @@ namespace game
 
             eventLoaded = true;
         }
+        
+        internal void UpdateData(string responce)
+        {
+            String[] Charictors = responce.Split('$');
+            for (int j = 0; j < Charictors.Length - 1; j++)
+            {
+                String[] charictor = Charictors[j].Split(',');
+                String name = charictor[0];
+                int HP = int.Parse(charictor[1]);
+                right[j].setHP(HP);
+            }
+        }
+
+        public int fightMemberNumber { get; set; }
+
+        public int currentFightmember { get; set; }
     }
 }

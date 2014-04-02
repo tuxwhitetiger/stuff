@@ -82,7 +82,7 @@ namespace game
             charictors = new Charictor[6];
             newGameScreen = new NewGameScreen();
             runningGame = new RunningGame(this,GraphicsDevice);
-            eventScreen = new EventScreen();
+            eventScreen = new EventScreen(this);
             characterEditScreen = new CarictorEditScreen(this);
             levelsXP = new levels();
             itemStore = new ItemStore();
@@ -396,6 +396,7 @@ namespace game
                         isrunningGame = false;
                         eventScreen.eventLoaded = false;
                         connection.Action("getEvent:" + connection.usernumber);
+                        jointEvent();
                         eventScreen.addPlayer(charictors[activeCharictorArrayId]);
                         while (!eventScreen.eventLoaded) { 
                         
@@ -418,6 +419,15 @@ namespace game
             }
             if (isEventScreen)
             {
+
+                if (gameTime.TotalGameTime.TotalMilliseconds >= timeLoopRunningGameUpdate)
+                {
+                    fetchUpdate();
+                    fetchCurrentFighter();
+                    timeLoopRunningGameUpdate = (int)gameTime.TotalGameTime.TotalMilliseconds + 500;
+                }
+                
+
                 String s = eventScreen.Update();
 
                 if (s.Equals("done")) {
@@ -907,5 +917,46 @@ namespace game
 
 
 
+
+
+        internal void updateServerFight(int ID, int HP, int fightMemberNumber)
+        {
+            Vector2 eventposition = charictors[activeCharictorArrayId].GetPosition();
+            String serverUpdate = "UpdtaeServerEvent:" + connection.usernumber + ":" + eventposition.X + ":" + eventposition.Y + ":" + ID + ":" + HP + ":" + fightMemberNumber + ":";
+            connection.Action(serverUpdate);
+        }
+        internal void fetchUpdate()
+        {
+            Vector2 eventposition = charictors[activeCharictorArrayId].GetPosition();
+            String serverUpdate = "fetchUpdtaeServerEvent:" + connection.usernumber + ":" + eventposition.X + ":" + eventposition.Y + ":";
+            connection.Action(serverUpdate);
+        }
+        internal void updateEvent(string responce)
+        {
+            eventScreen.UpdateData(responce);
+        }
+        internal void jointEvent()
+        {
+            Vector2 eventposition = charictors[activeCharictorArrayId].GetPosition();
+            String serverUpdate = "joinEvent:" + connection.usernumber + ":" + eventposition.X + ":" + eventposition.Y + ":";
+            connection.Action(serverUpdate);
+        }
+
+        internal void fetchCurrentFighter()
+        {
+            Vector2 eventposition = charictors[activeCharictorArrayId].GetPosition();
+            String serverUpdate = "fetchCurrentFighter:" + connection.usernumber + ":" + eventposition.X + ":" + eventposition.Y + ":";
+            connection.Action(serverUpdate);
+        }
+
+        internal void jointEventresponce(string responce)
+        {
+            eventScreen.fightMemberNumber = int.Parse(responce);
+        }
+
+        internal void fetchCurrentFighteresponce(string responce)
+        {
+            eventScreen.currentFightmember = int.Parse(responce);
+        }
     }
 }

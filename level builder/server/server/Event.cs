@@ -6,7 +6,9 @@ using System.Text;
 namespace server
 {
     public class Event
-    { 
+    {
+        int fightMember = 0;
+        int currentfightMember = 1;
         List<Charictor> left = new List<Charictor>();
         List<EventCharictor> right = new List<EventCharictor>();
         private int x;
@@ -21,6 +23,16 @@ namespace server
         internal void addCarictor(EventCharictor c)
         {
             right.Add(c);
+            fightMember++;
+            right.Last().fightmember = fightMember;
+        }
+        internal int addPlayer(Charictor c)
+        {
+            left.Add(c);
+            fightMember++;
+            left.Last().fightmember = fightMember;
+            return fightMember;
+
         }
 
         internal Microsoft.Xna.Framework.Vector2 getposition()
@@ -35,6 +47,43 @@ namespace server
                 sb.Append(ec.getData()+"$");
             }
             return sb.ToString();
+        }
+
+        internal void updateCharictor(int fighter,int ID, int HP)
+        {
+            if (fighter == currentfightMember)
+            {
+                right[ID].damage(HP);
+                if (currentfightMember == fightMember)
+                {
+                    currentfightMember = 1;
+                }
+                else {
+                    currentfightMember++;
+                }
+            }
+        }
+        internal int getCurrentFighter() {
+            return currentfightMember;
+        }
+
+        internal void update()
+        {
+
+            foreach (EventCharictor e in right) {
+                if (e.fightmember == currentfightMember) { 
+                    //enamy fight
+
+                    if (currentfightMember == fightMember)
+                    {
+                        currentfightMember = 1;
+                    }
+                    else
+                    {
+                        currentfightMember++;
+                    }
+                }
+            }
         }
     }
 }

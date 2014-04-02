@@ -5,22 +5,16 @@ using System.Text;
 
 namespace game.moves
 {
-    class stoneSkin
+    class stoneSkin : generalMove
     {
         Charictor player;
 
         public stoneSkin(Charictor player) {
             this.player = player;
         }
-        /// <summary>
-        /// overload self use move e.g. mana shild,bloodrage
-        /// </summary>
-        /// <param name="player">the player it is suesd on</param>
-
-        internal void use(Charictor charictor)
+        public override void use(EventCharictor enamy)
         {
-
+            throw new NotImplementedException();
         }
-
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace game.moves
 {
-    class zap
+    class zap : generalMove
     {
         private Charictor player;
 
@@ -15,9 +15,9 @@ namespace game.moves
             this.player = player;
         }
 
-        internal void use(Charictor charictor)
+        public override void use(EventCharictor enamy)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

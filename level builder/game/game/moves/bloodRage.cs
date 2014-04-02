@@ -5,7 +5,7 @@ using System.Text;
 
 namespace game.moves
 {
-    class bloodRage
+    class bloodRage : generalMove
     {
         Charictor player;
 
@@ -14,14 +14,9 @@ namespace game.moves
             // TODO: Complete member initialization
             this.player = player;
         }
-        /// <summary>
-        /// overload team effect heal all partyu menmbers or lowest 5 HP ect
-        /// </summary>
-        /// <param name="player">the players it is suesd on</param>
-
-        internal void use(Charictor charictor)
+        public override void use(EventCharictor enamy)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

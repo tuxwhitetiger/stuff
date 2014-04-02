@@ -16,6 +16,7 @@ namespace server
         private int experiance;
         private int level;
         private string chartype;
+        public int fightmember;
 
         public Charictor(){
 

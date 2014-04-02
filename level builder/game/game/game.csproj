@@ -158,6 +158,7 @@
     <Compile Include="moves\explosiveShot.cs" />
     <Compile Include="moves\fireBlast.cs" />
     <Compile Include="moves\forkShot.cs" />
+    <Compile Include="moves\generalMove.cs" />
     <Compile Include="moves\iceFire.cs" />
     <Compile Include="moves\manaSheild.cs" />
     <Compile Include="moves\ningaFurry.cs" />

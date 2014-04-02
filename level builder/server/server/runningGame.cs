@@ -135,6 +135,10 @@ namespace server
 
         internal bool update()
         {
+            if (gameMap != null)
+            {
+                gameMap.Update();
+            }
             if (users.Count == 0)
             {
                 return false;
@@ -143,6 +147,30 @@ namespace server
             {
                 return true;
             }
+        }
+
+
+        internal void updateEvent(int x, int y, int ID, int HP,int fightMember)
+        {
+            gameMap.UpdateEvent(x, y, ID, HP,fightMember);
+        }
+
+        internal String fetchupdateEvent(int X3, int Y3)
+        {
+            return gameMap.fetchupdateEvent(X3,Y3);
+        }
+        internal int fetchcurrentfighter(int x, int y) {
+            return gameMap.fetchCurrentFighter(x, y);
+        }
+
+        internal int joinEvent(int X3, int Y3,int connectioNumber)
+        {
+            foreach (User u in users){
+                if(u.getServerNumber() == connectioNumber){
+                    return gameMap.joinEvent(X3, Y3, u.getCurrentCharictor());
+                }
+            }
+            return 0;
         }
     }
 }

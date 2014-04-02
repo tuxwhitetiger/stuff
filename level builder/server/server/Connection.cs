@@ -322,6 +322,38 @@ namespace server
                                 sw.WriteLine("done");
                                 break;
 
+                            case "UpdtaeServerEvent":
+                                int conection = int.Parse(action[1]);
+                                int X2 = int.Parse(action[2]);
+                                int Y2 = int.Parse(action[3]);
+                                int ID2 = int.Parse(action[4]);
+                                int HP2 = int.Parse(action[5]);
+                                int fighter = int.Parse(action[6]);
+                                server.updateServerFight(conection, X2, Y2, ID2, HP2, fighter);
+                                sw.WriteLine("done");
+                                break;
+                            case "fetchUpdtaeServerEvent":
+                                int conection1 = int.Parse(action[1]);
+                                int X3 = int.Parse(action[2]);
+                                int Y3 = int.Parse(action[3]);
+                                String s3 = server.fetchServerFightUpdate(conection1, X3, Y3);
+                                sw.WriteLine(s3);
+                                break;
+                            case "fetchCurrentFighter":
+                                int conection2 = int.Parse(action[1]);
+                                int X4 = int.Parse(action[2]);
+                                int Y4 = int.Parse(action[3]);
+                                String s4 = server.fetchCurrentFighter(conection2, X4, Y4).ToString();
+                                sw.WriteLine(s4);
+                                break;
+                            case "joinEvent":
+                                int conection3 = int.Parse(action[1]);
+                                int X5 = int.Parse(action[2]);
+                                int Y5 = int.Parse(action[3]);
+                                String s5 = server.jointEvent(conection3, X5, Y5).ToString();
+                                sw.WriteLine(s5);
+                                break;
+
                             default : break;
                         }
                         message = null;

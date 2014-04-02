@@ -269,7 +269,35 @@ namespace game
                                         actionList.RemoveAt(0);
                                         responce = sr.ReadLine();
                                         break;
-                                        
+
+                                    case "UpdtaeServerEvent":
+                                        sw.WriteLine(action);
+                                        action = null;
+                                        actionList.RemoveAt(0);
+                                        responce = sr.ReadLine();
+                                        break;
+                                    case "fetchUpdtaeServerEvent":
+                                        sw.WriteLine(action);
+                                        action = null;
+                                        actionList.RemoveAt(0);
+                                        responce = sr.ReadLine();
+                                        game.updateEvent(responce);
+                                        break;
+                                    case "fetchCurrentFighter":
+                                        sw.WriteLine(action);
+                                        action = null;
+                                        actionList.RemoveAt(0);
+                                        responce = sr.ReadLine();
+                                        game.fetchCurrentFighteresponce(responce);
+                                        break;
+                                    case "joinEvent":
+                                        sw.WriteLine(action);
+                                        action = null;
+                                        actionList.RemoveAt(0);
+                                        responce = sr.ReadLine();
+                                        game.jointEventresponce(responce);
+                                        break;
+
                                     default:
                                         action = null;
                                         actionList.RemoveAt(0);

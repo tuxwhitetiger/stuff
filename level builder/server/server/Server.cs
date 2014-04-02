@@ -160,10 +160,6 @@ namespace server
         }
 
 
-
-
-
-
         public String LogIn(String userName, String Password,String userID) {
 
             int userIDD = int.Parse(userID); 
@@ -180,8 +176,6 @@ namespace server
                 return "logIn failed please try again";
             }
         }
-
-
         public string createNewAccount(string userName, string password)
         {
             if (password.Length > 5)
@@ -200,7 +194,6 @@ namespace server
                 return "password to short";
             }
         }
-
         public string createNewCharictor(string charType, string charName,int userID)
         {
             
@@ -211,14 +204,12 @@ namespace server
             return "error";
             
         }
-
         public String FetchCharictors(int userID) {
             int i = getDBIDFromServerID(userID);
             String s =DB.fetchcharacter(i);
             userSearch(userID).LoadCharictors(s);
             return s;
         }
-
         public User userSearch(int i)
         {
             foreach (object u in users)
@@ -232,7 +223,6 @@ namespace server
             }
             return null;
         }
-
         public int getDBIDFromServerID(int i)
         {
             foreach (object u in users)
@@ -246,7 +236,6 @@ namespace server
             }
             return 0;
         }
-
         public void newChatRoom(int ID) {
 
             foreach (object u in users)
@@ -260,7 +249,6 @@ namespace server
                 }
             }
         }
-
         public ChatRoom findChatRoom(int ID)
         {
             foreach (ChatRoom cr in chatrooms)
@@ -284,7 +272,6 @@ namespace server
             }
             return null;
         }
-
         public string getLobbyGames()
         {
             StringBuilder sb = new StringBuilder();
@@ -303,8 +290,6 @@ namespace server
             }
             return "null";
         }
-
-
         public void newGame(int hostID, String Dicription, int max){
             User u = userSearch(hostID);
             runningGame g = new runningGame(u, Dicription, max,this);
@@ -312,14 +297,11 @@ namespace server
             chatrooms.Add(cr);
             games.Add(g);
         }
-
         public void uploadMap(int ID, string mapName, int mapsize, int[,] map,List<Event> events, string[] action)
         {
             findgame(ID).uploadMap(mapName, mapsize, map, events, action);
             mapcount++;
         }
-
-
         internal void cleanUser(int ThisUser)
         {
             foreach (runningGame game in games) {
@@ -336,12 +318,10 @@ namespace server
                 }
             }
         }
-
         internal void setIP(string localIP)
         {
             IP = localIP;
         }
-
         internal void updateCharictorsTalentPoints(int charictorID, int talentpoints)
         {
             DB.updateCharictorsTalentPoints(charictorID, talentpoints);
@@ -350,17 +330,14 @@ namespace server
         {
             DB.updateCharictorsAddTalent(charictorID, treenumber,x,y,level);
         }
-
         internal void updateCharictorXP(int charictorDBid2, int exp)
         {
             DB.updateCharictorXP(charictorDBid2,exp);
         }
-
         internal void updateCharictorLevel(int charictorDBid3, int level)
         {
             DB.updateCharictorLevel(charictorDBid3, level);
         }
-
         internal void equipItemFromInventory(int charictorID, int itemToArmorID, int itemToInventoryID)
         {
             DB.equipItemFromInventory(charictorID, itemToArmorID, itemToInventoryID);
@@ -369,6 +346,19 @@ namespace server
         {
             DB.pickupitem(charictorID,itemToInventoryID);
         }
-
+        internal void updateServerFight(int connectionID, int x, int y, int ID, int HP,int fighter) {
+            findgame(connectionID).updateEvent(x, y, ID, HP,fighter);
+        }
+        internal string fetchServerFightUpdate(int conection1, int X3, int Y3)
+        {
+            return findgame(conection1).fetchupdateEvent(X3, Y3);
+        }
+        internal int fetchCurrentFighter(int conection1, int x, int y) {
+            return findgame(conection1).fetchcurrentfighter(x, y);
+        }
+        internal int jointEvent(int conection3, int X3, int Y3)
+        {
+            return findgame(conection3).joinEvent(X3, Y3, conection3);
+        }
     }
 }

@@ -28,9 +28,11 @@ namespace server
             hostID = ID;
         }
         
-        public void Update(GameTime gameTime)
+        public void Update()
         {
-             
+            foreach (Event e in events) {
+                e.update();
+            }
         }
         public void click(int tiletype) {
             MouseState ms = Mouse.GetState();
@@ -64,9 +66,6 @@ namespace server
                 }
             }
         }
-
-
-
 
         public void yShiftincrees(int p)
         {
@@ -108,5 +107,48 @@ namespace server
             return "null";
         }
 
+
+        internal void UpdateEvent(int x, int y, int ID, int HP, int fightmember)
+        {
+            foreach (Event e in events) {
+                if (e.getposition().X == x && e.getposition().Y == y) {
+                    e.updateCharictor(fightmember,ID, HP);
+                }
+            }
+        }
+
+        internal String fetchupdateEvent(int x, int y)
+        {
+            foreach (Event e in events)
+            {
+                if (e.getposition().X == x && e.getposition().Y == y)
+                {
+                    return e.getData();
+                }
+            }
+            return "null";
+        }
+        internal int fetchCurrentFighter(int x,int y){
+            foreach (Event e in events)
+            {
+                if (e.getposition().X == x && e.getposition().Y == y)
+                {
+                    return e.getCurrentFighter();
+                }
+            }
+            return 0;
+        }
+
+        internal int joinEvent(int X3, int Y3,Charictor player)
+        {
+            foreach (Event e in events)
+            {
+                if (e.getposition().X == X3 && e.getposition().Y == Y3)
+                {
+                    return e.addPlayer(player);
+                }
+            }
+            return 0;
+        }
     }
 }

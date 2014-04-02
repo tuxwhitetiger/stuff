@@ -93,14 +93,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="game.exe" size="93696">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="game.exe" size="97792">
       <assemblyIdentity name="game" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>8+dV1hsA8cf8rqQ89oYux/Vmak0=</dsig:DigestValue>
+        <dsig:DigestValue>K1rzZ9DOMrXucAH872uu3olpdbo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

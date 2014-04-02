@@ -5,7 +5,7 @@ using System.Text;
 
 namespace game.moves
 {
-    class thunderPunch
+    class thunderPunch : generalMove
     {
         Charictor player;
 
@@ -13,14 +13,10 @@ namespace game.moves
         { 
             this.player = player;
         }
-        /// <summary>
-        /// overload team effect heal all partyu menmbers or lowest 5 HP ect
-        /// </summary>
-        /// <param name="player">the players it is suesd on</param>
 
-        internal void use(Charictor charictor)
+        public override void use(EventCharictor enamy)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

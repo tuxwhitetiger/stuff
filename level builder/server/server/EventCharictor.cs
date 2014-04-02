@@ -11,6 +11,7 @@ namespace server
         private int HP;
         private int AttackType;
         private int AttackPower;
+        public int fightmember;
         List<String> conversation = new List<string>();
 
         public EventCharictor(string name, int HP, int AttackType, int AttackPower)
@@ -36,6 +37,16 @@ namespace server
 
 
             return sb.ToString();
+        }
+
+        internal void setHP(int HP)
+        {
+            this.HP = HP;
+        }
+
+        internal void damage(int HP)
+        {
+            this.HP -= HP;
         }
     }
 }

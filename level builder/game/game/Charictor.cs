@@ -405,5 +405,11 @@ namespace game
         private void loadBaseMovesWizard() {
             addmove(Move.zap);
         }
+        internal void UseMove(int move, EventCharictor eventCharictor)
+        {
+            moves.generalMove d = (moves.generalMove)movesdata[move];
+            d.use(eventCharictor);
+            
+        }
     }
 }
